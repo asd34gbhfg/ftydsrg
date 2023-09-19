@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page con Video Aleatorio</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+        }
+
+        #content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        /* Estilo para el fondo de la landing page */
+        body {
+            margin: 0;
+            padding: 0;
+            background: url("fondo.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh; /* 100% del alto de la ventana */
+        }
+
+        /* Estilo para el logotipo de "Play" */
+        .play-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; /* Ancho del logotipo */
+        }
+    </style>
+</head>
+<body>
+    <video id="background-video" autoplay muted loop>
+       
+        Tu navegador no admite video HTML5.
+    </video>
+    <div id="content">
+        <h1></h1>
+        <p></p>
+    </div>
+
+    <script>
+        
+        
+        // Obtener una URL de video aleatoria
+        const videoSources = ["video1.mp4", "video2.mp4", "video3.mp4", "video4.mp4"];
+        const randomVideoIndex = Math.floor(Math.random() * videoSources.length);
+        const video = document.getElementById("background-video");
+        video.src = videoSources[randomVideoIndex];
+
+        // Función para obtener parámetros de URL
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+    
+
+        // Contador de clics
+        let clickCount = 0;
+
+        // Función para redirigir después de 2 clics
+        function redirigirDespuesDeDosClics() {
+            clickCount++;
+            if (clickCount === 2) {
+                window.location.href = "https://www.tusitio.com";
+            }
+        }
+
+        // Agregar evento de clic a todo el documento
+        document.body.addEventListener("click", redirigirDespuesDeDosClics);
+
+        // Agregar un evento de clic al enlace
+        document.getElementById("volverAtras").addEventListener("click", function() {
+            history.back(); // Volver atrás en el historial de navegación
+            setTimeout(function() {
+                window.location.href = "#"; // Redirigir a la nueva página después de 2 segundos
+            }, 2000); // 2000 milisegundos = 2 segundos
+        });
+
+    </script>
+
+<div class="container">
+    <img class="play-logo" src="play-logo.png" alt="Logotipo de Play con fondo transparente">
+</div>
+</body>
+</html>
